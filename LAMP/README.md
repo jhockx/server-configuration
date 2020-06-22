@@ -1,0 +1,2 @@
+# Installing and running LA(M)P server:
+To host a website on the LA(M)P stack, use this folder structure on the server. The `docker-compose.yml` file should be adjusted to the specific website accordingly. The only thing that needs to be replaced is the `VIRTUAL_HOST` and the `container_name`.
