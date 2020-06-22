@@ -1,0 +1,24 @@
+image: docker:latest
+
+before_script:
+  - docker info
+  - apk update
+  - apk upgrade
+  - apk add python3-dev py-pip libffi-dev openssl-dev gcc libc-dev make # Required for Docker Compose installation
+  - pip3 install docker-compose
+  - docker-compose --version
+  
+stages:
+  - deploy
+    
+deploy:
+  stage: deploy
+  tags: [<TAG_NAME>]
+  script:
+    - ls
+    - docker container stop <something.nl> || true
+    - docker container rm <something.nl> || true
+    - docker-compose up -d
+    - docker cp ./src/. <something.nl>:/var/www/html
+    - docker ps -a
+  only: [master]

@@ -53,3 +53,22 @@ We want each job of the GitLab Runner to run in a Docker container. For this, do
 - In the configuration of the Runner (`/etc/gitlab-runner/config.toml`), you need to add `"/var/run/docker.sock:/var/run/docker.sock"` to the volumes. This lets the runner create new Docker containers through the Unix socket that the Docker daemon listens to. HTTP requests are send to this socket to create new containers.
 - Optionally, you can set `disable_cache` to `true`. This will remove all disabled containers, which can be nice if you do not have a lot of space on the host or if you want less cluttering in Portainer. It can slow down jobs of course.
 - Restart the runner: `gitlab-runner restart`.
+
+To use CI/CD, you need a `gitlab-ci.yml` file in the root of your project. This file can be found in some of the folders and used to auto deploy on the host. If you want to use Docker-in-Docker (dind), you can add the following right after the image definition:
+```
+services:
+  - name: docker:dind
+```
+
+If that doesn't work, try the following:
+```
+services:
+  - name: docker:19.03.0-dind
+    entrypoint: ["env", "-u", "DOCKER_HOST"]
+    command: ["dockerd-entrypoint.sh"]
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+  # See https://github.com/docker-library/docker/pull/166
+  DOCKER_TLS_CERTDIR: ""
+```
