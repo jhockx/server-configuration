@@ -33,11 +33,9 @@ docker run hello-world
 ```
 
 ### Docker compose installation
-First replace the version number with the current version in the script below, check the [release page](https://github.com/docker/compose/releases). Then run.
+Follow the steps in in the [Docker documentation](https://docs.docker.com/compose/install/). However, this didn't work for the Raspberry Pi specifically, the command couldn't be found. So I tried the following, which did work (after installing python3 and pip3):
 ```
-sudo -i
-# curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-# chmod +x /usr/local/bin/docker-compose
+sudo pip3 install docker-compose
 ```
 
 ### Nginx reverse proxy
