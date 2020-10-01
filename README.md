@@ -3,11 +3,12 @@ This project is made to quickly deploy a new server which hosts multiple website
 
 # Required software
 ### Docker installation
-*The [Getting started with Docker on your VPS](https://blog.ssdnodes.com/blog/getting-started-docker-vps/) tutorial was followed for this part*
+*The [Getting started with Docker on your VPS](https://blog.ssdnodes.com/blog/getting-started-docker-vps/) tutorial was followed for this part.  
+Also see the [Docker documentation](https://docs.docker.com/engine/install/debian/).*
 
 First, Docker and Docker-compose need to be installed on the server:
 ```
-sudo curl -sS https://get.docker.com/ | sh
+curl -fsSL https://get.docker.com -o get-docker.sh
 ```
 
 Test the installation:
