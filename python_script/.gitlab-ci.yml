@@ -1,0 +1,52 @@
+image: docker:latest
+
+stages:
+  - build
+  - run
+  - cleanup
+
+variables:
+  IMAGE_TAG: "<YOUR_IMAGE_TAG>"
+  CONTAINER: "<YOUR_CONTAINER_NAME>"
+
+build:
+  stage: build
+  tags: [ <YOUR_GITLAB_RUNNER_TAG> ]
+  script:
+    - docker build -t $IMAGE_TAG .
+  only:
+    refs:
+      - master
+    changes:
+      - Dockerfile
+
+deploy:
+  stage: run
+  tags: [ <YOUR_GITLAB_RUNNER_TAG> ]
+  script:
+    - docker stop $CONTAINER || true
+    - docker rm $CONTAINER || true
+    - docker run -d -v /logs:/logs --name $CONTAINER $IMAGE_TAG
+  only:
+    - master
+
+some-script:
+  stage: run
+  tags: [ <YOUR_GITLAB_RUNNER_TAG> ]
+  script:
+    - docker exec -t $CONTAINER python3 <YOUR_PYTHON_SCRIPT>.py
+    - docker cp $CONTAINER:/logs/. $CI_PROJECT_DIR/logs # For artifacts
+  artifacts:
+    paths:
+      - logs/
+    expire_in: 1 week
+  when: manual
+
+cleanup:
+  stage: cleanup
+  tags: [ <YOUR_GITLAB_RUNNER_TAG> ]
+  script:
+    - docker stop $CONTAINER || true
+    - docker rm $CONTAINER || true
+  only:
+    - master
