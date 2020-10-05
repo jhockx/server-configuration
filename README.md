@@ -1,5 +1,5 @@
 # Purpose
-This project is made to quickly deploy a new server which hosts multiple websites. It is assumed you have a Linux server, your repo is on GitLab and you want to use the CI/CD abilities of GitLab for the hosting of (some of) the websites. Each website gets its own Docker container on the server. Furthermore, there is a nginx-proxy server (in its own Docker container) which routes you to the correct Docker container, based on the accessed domain name. You can find the GitHub project of this nginx-proxy server [here](https://github.com/jwilder/nginx-proxy).
+This project is made to provide some reference code to quickly deploy a new server which hosts multiple websites, runs scripts, host REST API's etc. It is assumed you have a Linux server, your repo is on GitLab and you want to use the CI/CD abilities of GitLab. Each website/script/API gets its own Docker container on the server. Furthermore, there is a nginx-proxy server (in its own Docker container) which routes domain names to the correct Docker container. You can find the GitHub project of this nginx-proxy server [here](https://github.com/jwilder/nginx-proxy).
 
 # Required software
 ### Docker installation
@@ -33,7 +33,7 @@ docker run hello-world
 ```
 
 ### Docker compose installation
-Follow the steps in in the [Docker documentation](https://docs.docker.com/compose/install/). However, this didn't work for the Raspberry Pi specifically, the command couldn't be found. So I tried the following, which did work (after installing python3 and pip3):
+Follow the steps in in the [Docker documentation](https://docs.docker.com/compose/install/). However, this didn't work for the Raspberry Pi specifically, the command couldn't be found. So I tried the following as an alternative, which did work (after installing python3 and pip3):
 ```
 sudo pip3 install docker-compose
 ```
@@ -41,8 +41,8 @@ sudo pip3 install docker-compose
 ### Nginx reverse proxy
 See the README in the `nginx_proxy` folder.
 
-# Add websites
-To add websites, follow the instructions in the `README.md` in the folder of the specific architecture you want to use for your website. For instance, if you want to host a Wordpress website, look in the `Wordpress` folder.
+# Add websites, run scripts, host REST API's
+To add websites, follow the instructions in the `README.md` in the folder of the specific architecture you want to use for your website. For instance, if you want to host a Wordpress website, look in the `Wordpress` folder or if you want to run a scheduled Python script look in the python_script folder.
 
 # Add CI/CD by configuring a GitLab Runner
 [Install the GitLab Runner](https://docs.gitlab.com/runner/install/linux-repository.html). After installation, go to `Settings > CI/CD > Runners (Expand)` in your project/subgroup/group in GitLab and follow the instructions to setup your GitLab Runner. One of the things you need to answer is which executor you want to use. Pick `Docker` and as image use `alpine:latest`. Just to make sure, restart you GitLab Runner by running `gitlab-runner restart` on your server. Run `gitlab-runner verify` to instantly let the Runner connect to your repo. If you want this runner to be available for multiple projects, go to the Runner on GitLab and un-check "Lock to current projects".  
