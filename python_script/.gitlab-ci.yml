@@ -27,6 +27,7 @@ deploy:
     - docker stop $CONTAINER || true
     - docker rm $CONTAINER || true
     - docker run -d -v /logs:/logs --name $CONTAINER $IMAGE_TAG
+    - docker cp . $CONTAINER:.
   only:
     - master
 
