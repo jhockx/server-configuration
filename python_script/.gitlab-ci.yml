@@ -8,6 +8,7 @@ stages:
 variables:
   IMAGE_TAG: "<YOUR_IMAGE_TAG>"
   CONTAINER: "<YOUR_CONTAINER_NAME>"
+  SOME_BOOLEAN: "True"
 
 build:
   stage: build
@@ -36,12 +37,17 @@ some-script:
   tags: [ <YOUR_GITLAB_RUNNER_TAG> ]
   script:
     - docker exec -t $CONTAINER python3 <YOUR_PYTHON_SCRIPT>.py
+  after_script:
     - docker cp $CONTAINER:/logs/. $CI_PROJECT_DIR/logs # For artifacts
   artifacts:
     paths:
       - logs/
     expire_in: 1 week
-  when: manual
+  only:
+    refs:
+      - master
+    variables:
+      - $SOME_BOOLEAN == "True"
 
 cleanup:
   stage: cleanup
