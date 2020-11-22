@@ -1,35 +1,41 @@
 version: "3"
 
 services:
-   db_node_domain:
-     image: mysql:5.7
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     expose:
+       - 8090:80
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: PASSWORD
+       WORDPRESS_DB_NAME: databasename
+       VIRTUAL_HOST: <something.nl>,<www.something.nl>,<etc>
      volumes:
-       - db_data:/var/lib/mysql
+      - wordpress:/var/www/html
+     container_name: <something.nl/something.com>
+     
+     db:
+     image: mysql:5.7
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: PASSWORD
-       MYSQL_DATABASE: wordpress
+       MYSQL_DATABASE: databasename
        MYSQL_USER: wordpress
        MYSQL_PASSWORD: PASSWORD
-     container_name: wordpress_db_<something.nl>
-
-   wordpress:
-     depends_on:
-       - db_node_domain
-     image: wordpress:latest
-     expose:
-       - 80
-     restart: always
-     environment:
-       VIRTUAL_HOST: <something.nl>,<www.something.nl>,<etc>
-       WORDPRESS_DB_HOST: db_node_domain:3306
-       WORDPRESS_DB_USER: wordpress
-       WORDPRESS_DB_PASSWORD: PASSWORD
-     container_name: <something.nl/something.com>
+      volumes:
+       - db:/var/lib/mysql
+     container_name: <something.nl>_db
+     
 volumes:
-    db_data:
+    wordpress:
+    db:
 
 networks:
   default:
     external:
       name: nginx-proxy
+      
