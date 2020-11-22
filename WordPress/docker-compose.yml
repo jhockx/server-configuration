@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
    wordpress:
@@ -18,7 +18,7 @@ services:
       - wordpress:/var/www/html
      container_name: <something.nl/something.com>
      
-     db:
+   db:
      image: mysql:5.7
      restart: always
      environment:
