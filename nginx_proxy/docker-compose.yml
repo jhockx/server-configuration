@@ -7,6 +7,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - /path/to/htpasswd:/etc/nginx/htpasswd
       - conf:/etc/nginx/conf.d
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
