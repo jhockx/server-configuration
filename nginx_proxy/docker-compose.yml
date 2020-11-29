@@ -34,7 +34,8 @@ services:
 
 volumes:
   conf:
-  vhost:                                                                                                                                                                      html:
+  vhost:
+  html:
   dhparam:
   certs:
 
