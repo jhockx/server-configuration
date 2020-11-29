@@ -9,6 +9,7 @@ services:
      restart: always
      environment:
        VIRTUAL_HOST: <something.nl>,<www.something.nl>,<etc>
+       LETSENCRYPT_HOST: <something.nl>,<www.something.nl>,<etc>
      container_name: <something.nl/something.com>
 
 networks:
