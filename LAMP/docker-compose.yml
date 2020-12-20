@@ -1,16 +1,16 @@
 version: '3'
 
 services:
-   server:
-     image: php:apache
-     working_dir: /var/www/html
-     expose:
-       - 80
-     restart: always
-     environment:
-       VIRTUAL_HOST: <something.nl>,<www.something.nl>,<etc>
-       LETSENCRYPT_HOST: <something.nl>,<www.something.nl>,<etc>
-     container_name: <something.nl/something.com>
+  server:
+    image: php:apache
+    working_dir: /var/www/html
+    expose:
+      - 80
+    restart: always
+    environment:
+      VIRTUAL_HOST: <something.nl/something.com>,<www.something.nl/www.something.com>,<etc>
+      LETSENCRYPT_HOST: <something.nl/something.com>,<www.something.nl/www.something.com>,<etc>
+    container_name: <something.nl/something.com>
 
 networks:
   default:

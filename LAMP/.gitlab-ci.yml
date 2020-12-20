@@ -1,16 +1,16 @@
 image: docker/compose:latest
-  
+
 stages:
   - deploy
-    
+
 deploy:
   stage: deploy
-  tags: [<TAG_NAME>]
+  tags: [ <TAG_NAME> ]
   script:
     - ls
-    - docker container stop <something.nl> || true
-    - docker container rm <something.nl> || true
+    - docker container stop <something.nl/something.com> || true
+    - docker container rm <something.nl/something.com> || true
     - docker-compose up -d
-    - docker cp ./src/. <something.nl>:/var/www/html
+    - docker cp ./src/. <something.nl/something.com>:/var/www/html
     - docker ps -a
-  only: [master]
+  only: [ master ]
