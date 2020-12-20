@@ -3,18 +3,18 @@ services:
   web:
     image: aspendigital/octobercms:latest
     expose:
-       - 80
+      - 80
     restart: always
     environment:
-       CMS_LINK_POLICY: secure
-       VIRTUAL_HOST: <something.nl>,<www.something.nl>,<etc>
-       LETSENCRYPT_HOST: <something.nl>,<www.something.nl>,<etc>
+      CMS_LINK_POLICY: secure
+      VIRTUAL_HOST: <something.nl>,<www.something.nl>,<etc>
+      LETSENCRYPT_HOST: <something.nl>,<www.something.nl>,<etc>
     volumes:
-      - <something.nl/something.com>:/var/www/html/plugins/aspendigital/resizer
+      - <something.nl/something.com>:/var/www/html/
     container_name: <something.nl/something.com>
 
 volumes:
-    <something.nl/something.com>:
+  <something.nl/something.com>:
 
 networks:
   default:
