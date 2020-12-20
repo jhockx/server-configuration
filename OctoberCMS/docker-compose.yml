@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    image: aspendigital/octobercms
+    expose:
+       - 80
+    restart: always
+    environment:
+       CMS_LINK_POLICY: secure
+       VIRTUAL_HOST: <something.nl>,<www.something.nl>,<etc>
+       LETSENCRYPT_HOST: <something.nl>,<www.something.nl>,<etc>
+    volumes:
+      - <something.nl/something.com>:/var/www/html/plugins/aspendigital/resizer
+    container_name: <something.nl/something.com>
+
+volumes:
+    <something.nl/something.com>:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
