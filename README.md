@@ -93,3 +93,6 @@ variables:
   # See https://github.com/docker-library/docker/pull/166
   DOCKER_TLS_CERTDIR: ""
 ```
+
+# Increase performance
+You can increase the performance of the server by adding some swap memory in case the RAM memory is getting too full. Follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04) to set it up. 
