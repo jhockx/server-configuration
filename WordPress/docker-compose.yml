@@ -16,7 +16,7 @@ services:
        VIRTUAL_HOST: <something.nl>,<www.something.nl>,<etc>
        LETSENCRYPT_HOST: <something.nl>,<www.something.nl>,<etc>
      volumes:
-      - wordpress:/var/www/html
+      - <something.nl/something.com>:/var/www/html
      container_name: <something.nl/something.com>
      
    db:
@@ -28,12 +28,12 @@ services:
        MYSQL_USER: wordpress
        MYSQL_PASSWORD: PASSWORD
       volumes:
-       - db:/var/lib/mysql
+       - <something.nl/something.com>_db:/var/lib/mysql
      container_name: <something.nl>_db
      
 volumes:
-    wordpress:
-    db:
+    <something.nl/something.com>:
+    <something.nl/something.com>_db:
 
 networks:
   default:
