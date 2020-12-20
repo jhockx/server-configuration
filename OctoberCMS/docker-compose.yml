@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: aspendigital/octobercms
+    image: aspendigital/octobercms:latest
     expose:
        - 80
     restart: always
