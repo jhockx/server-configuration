@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  streamlit:
+    image: <something>
+    command: "streamlit run app.py"
+    expose:
+      - 8501
+    restart: always
+    environment:
+      VIRTUAL_HOST: <something.nl/something.com>,<www.something.nl/www.something.com>,<etc>
+      LETSENCRYPT_HOST: <something.nl/something.com>,<www.something.nl/www.something.com>,<etc>
+    container_name: <something.nl/something.com>
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

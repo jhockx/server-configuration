@@ -1,0 +1,35 @@
+image: docker/compose:latest
+
+stages:
+  - build
+  - deploy
+
+variables:
+  IMAGE_TAG: "<something>"
+  CONTAINER: "<something.nl/something.com>"
+
+build:
+  stage: build
+  tags: [ <TAG_NAME> ]
+  script:
+    - docker build -t $IMAGE_TAG .
+  only:
+    refs:
+      - master
+    changes:
+      - Dockerfile
+      - requirements.txt
+
+deploy:
+  stage: deploy
+  tags: [ <TAG_NAME> ]
+  script:
+    - ls
+    - docker container stop $CONTAINER || true
+    - docker container rm $CONTAINER || true
+    - docker-compose up -d
+    - docker cp . $CONTAINER:.
+    - docker ps -a
+  only:
+    refs:
+      - master
