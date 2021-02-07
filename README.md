@@ -94,5 +94,45 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 ```
 
-# Increase performance
+# Other server settings
+### Disable password authentication over SSH
+
+### Firewall
+#### Allow IPv6
+```
+sudo nano /etc/default/ufw
+```
+And set the following:
+```
+IPV6=yes
+```
+
+#### Set policies
+```
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+
+#### Allowing connections
+Set the following:
+```
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+```
+Or the equivalent:
+```
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+```
+Set specific port ranges (setting tcp/udp is mandatory for port ranges):
+```
+sudo ufw allow 6000:6007/tcp
+sudo ufw allow 6000:6007/udp
+```
+
+For more info, see [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04).
+
+### Increase performance
 You can increase the performance of the server by adding some swap memory in case the RAM memory is getting too full. Follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04) to set it up. 
