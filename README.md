@@ -95,9 +95,21 @@ variables:
 ```
 
 # Other server settings
-### Disable password authentication over SSH
+## Disable password authentication over SSH
+Edit SSH config:
+```
+sudo nano /etc/ssh/sshd_config
+```
+And set the following:
+```
+PasswordAuthentication no
+```
+Then restart the service:
+```
+service ssh restart
+```
 
-### Firewall
+## Firewall
 #### Allow IPv6
 ```
 sudo nano /etc/default/ufw
@@ -131,8 +143,12 @@ Set specific port ranges (setting tcp/udp is mandatory for port ranges):
 sudo ufw allow 6000:6007/tcp
 sudo ufw allow 6000:6007/udp
 ```
+Finally enable:
+```
+sudo ufw enable
+```
 
 For more info, see [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04).
 
-### Increase performance
+## Increase performance
 You can increase the performance of the server by adding some swap memory in case the RAM memory is getting too full. Follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04) to set it up. 
