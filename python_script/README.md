@@ -1,5 +1,5 @@
 # Running scheduled Python scripts:
-Take a look at the `Dockerfile`, it is specifically designed to be able to run Python and Pip on the Raspberry Pi (Debian based). If you want to run scripts on a different kind of server, the Dockerfile can be altered accordingly.
+Take a look at the `Dockerfile`, when building the image, it simply copies the files and installs all the needed packages. If you want to run scripts on a Raspberry Pi (ARM architecture), take a look at the `Dockerfile-RaspberryPi`, it is specifically designed to be able to run Python and Pip on the Raspberry Pi and Home Assistant (Debian based). Remove `-RaspberryPi` the name before using it.
 
 The `.gitlab-ci.yml` has two stages:
 - The `build` stage which has a single job to build the Docker Image. Because this can sometimes be a slow process (especially installing Pandas on the Raspberry Pi for instance), the build stage will only be executed when the Dockerfile has been changed.
