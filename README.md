@@ -103,6 +103,9 @@ sudo nano /etc/ssh/sshd_config
 And set the following:
 ```
 PasswordAuthentication no
+PubkeyAuthentication yes
+PasswordAuthentication no
+X11Forwarding no
 ```
 Then restart the service:
 ```
