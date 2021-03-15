@@ -26,6 +26,7 @@ docker run hello-world
 
 ### Docker compose installation
 _Follow the steps in in the [Docker documentation](https://docs.docker.com/compose/install/)._  
+
 However, this didn't work for the Raspberry Pi specifically, the command couldn't be found. So I tried the following as an alternative, which did work (after installing python3 and pip3):
 ```
 sudo pip3 install docker-compose
