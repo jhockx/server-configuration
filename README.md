@@ -88,6 +88,19 @@ variables:
 ```
 
 # Other server settings
+## Connect to server with SSH keys
+From your local pc, from a Linux terminal or WSL on Windows, run the following (your private key should be in the `.ssh` folder locally):
+```
+ssh-copy-id user@ip_address
+```
+
+If that doesn't work, try to follow [a few of these steps](https://superuser.com/questions/215504/permissions-on-private-key-in-ssh-folder):
+- Home directory on the server should not be writable by others: `chmod go-w /home/$USER`
+- SSH folder on the server needs 700 permissions: `chmod 700 /home/$USER/.ssh`
+- Authorized_keys file needs 644 permissions: `chmod 644 /home/$USER/.ssh/authorized_keys`
+- Make sure that user owns the files/folders and not root: `chown $USER:$USER authorized_keys` (or without the `$USER` after the colon) and `chown $USER:$USER /home/$USER/.ssh` (or without the `$USER` after the colon)
+- Put the generated public key (from ssh-keygen) in the user's authorized_keys file on the server by running `ssh-copy-id user@ip_address` again locally
+
 ## Disable password authentication over SSH
 Edit SSH config:
 ```
