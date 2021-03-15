@@ -3,22 +3,14 @@ This project is made to provide some reference code to quickly deploy a new serv
 
 # Required software
 ### Docker installation
-*The [Getting started with Docker on your VPS](https://blog.ssdnodes.com/blog/getting-started-docker-vps/) tutorial was followed for this part.  
-Also see the [Docker documentation](https://docs.docker.com/engine/install/debian/).*
+_Follow the [Docker documentation](https://docs.docker.com/engine/install/debian/)._  
+Please be aware you need to select the correct distro.
 
-First, Docker and Docker-compose need to be installed on the server:
-```
-curl -fsSL https://get.docker.com -o get-docker.sh
-```
-
-Test the installation:
-```
-sudo docker run hello-world
-```
-
+_Then follow parts of the [post-installation steps](https://docs.docker.com/compose/install/):_  
 Automatically start Docker on boot:
 ```
-sudo systemctl enable docker
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
 ```
 
 To not write `sudo` in front of each Docker command all the time, we can add the Docker group to the current user:
@@ -33,7 +25,8 @@ docker run hello-world
 ```
 
 ### Docker compose installation
-Follow the steps in in the [Docker documentation](https://docs.docker.com/compose/install/). However, this didn't work for the Raspberry Pi specifically, the command couldn't be found. So I tried the following as an alternative, which did work (after installing python3 and pip3):
+_Follow the steps in in the [Docker documentation](https://docs.docker.com/compose/install/)._  
+However, this didn't work for the Raspberry Pi specifically, the command couldn't be found. So I tried the following as an alternative, which did work (after installing python3 and pip3):
 ```
 sudo pip3 install docker-compose
 ```
